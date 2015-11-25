@@ -57,7 +57,7 @@ namespace details
             // RtlCaptureSTackBackTrace is not available in MSDK, so we only call it under Desktop or _DEBUG MSDK.
             //  For MSDK unsupported version, we will return zero frame number.
 #if !defined(__cplusplus_winrt)
-            capturedFrames = RtlCaptureStackBackTrace(static_cast<DWORD>(skipFrames + 1), static_cast<DWORD>(captureFrames), stackData, nullptr);
+            //capturedFrames = RtlCaptureStackBackTrace(static_cast<DWORD>(skipFrames + 1), static_cast<DWORD>(captureFrames), stackData, nullptr);
 #endif
             return capturedFrames;
         }
