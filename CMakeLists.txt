@@ -2,9 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 set(Casablanca_LIBRARY pplx)
 set(CMAKE_DEBUG_POSTFIX d)
-ADD_DEFINITIONS("-DCPPREST_FORCE_PPLX=1")
-ADD_DEFINITIONS("-D_PPLX_EXPORT")
-ADD_DEFINITIONS("-D_ASYNCRT_EXPORT")
+
 set(SOURCES_COMMON
   src/pplx/pplx.cpp
   src/utilities/asyncrt_utils.cpp
@@ -31,7 +29,7 @@ if(UNIX)
       src/pplx/pplxlinux.cpp
     )
   else()
-    list(APPEND SOURCES pplx/pplxlinux.cpp)
+    list(APPEND SOURCES src/pplx/pplxlinux.cpp)
   endif()
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNINGS} -Werror -pedantic")
 elseif(WIN32)
@@ -46,14 +44,17 @@ elseif(WIN32)
     Winhttp.lib
   )
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNINGS} /Zm200")
-  include_directories("src/pch")
-  include_directories("include")
+
   #set_source_files_properties(pch/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
   if (BUILD_SHARED_LIBS)
     add_definitions(-D_ASYNCRT_EXPORT -D_PPLX_EXPORT -D_USRDLL)
-  endif()
-endif()
-
+    ADD_DEFINITIONS("-DCPPREST_FORCE_PPLX=1")
+    ADD_DEFINITIONS("-D_PPLX_EXPORT")
+    ADD_DEFINITIONS("-D_ASYNCRT_EXPORT")
+  endif(WIN32)
+endif(UNIX)
+include_directories("src/pch")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
 add_library(${Casablanca_LIBRARY} SHARED ${SOURCES})
 
 target_link_libraries(${Casablanca_LIBRARY}
