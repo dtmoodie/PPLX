@@ -55,7 +55,7 @@ elseif(WIN32)
 endif()
 
 add_library(${Casablanca_LIBRARY} SHARED ${SOURCES})
-
+#cotire(${Casablanca_LIBRARY})
 target_link_libraries(${Casablanca_LIBRARY}
   ${CMAKE_THREAD_LIBS_INIT}
   ${Boost_SYSTEM_LIBRARY}

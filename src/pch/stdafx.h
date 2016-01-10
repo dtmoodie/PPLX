@@ -26,20 +26,20 @@
 #pragma once
 
 #if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-local-typedef"
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wunused-local-typedef"
 #endif
 
 #include "cpprest/details/cpprest_compat.h"
 #include "cpprest/details/basic_types.h"
 
 #ifdef _WIN32
-#ifdef CPPREST_TARGET_XP
-#include <winsdkver.h>
-#ifndef _WIN32_WINNT
-#define _WIN32_WINNT _WIN32_WINNT_WS03 //Windows XP with SP2
-#endif
-#endif
+    #ifdef CPPREST_TARGET_XP
+        #include <winsdkver.h>
+        #ifndef _WIN32_WINNT
+            #define _WIN32_WINNT _WIN32_WINNT_WS03 //Windows XP with SP2
+        #endif
+    #endif
 #include <SDKDDKVer.h>
 // use the debug version of the CRT if _DEBUG is defined
 #ifdef _DEBUG
@@ -49,9 +49,9 @@
 #endif
 
 #ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
-// Windows Header Files:
-#define NOMINMAX
+    #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
+    // Windows Header Files:
+    #define NOMINMAX
 #endif
 
 #include <windows.h>
@@ -59,34 +59,34 @@
 
 // Windows Header Files:
 #if !defined(__cplusplus_winrt)
-#include <winhttp.h>
-
+    #include <winhttp.h>
 #endif // #if !defined(__cplusplus_winrt)
+
 #else // LINUX or APPLE
-#define __STDC_LIMIT_MACROS
-#include <stdint.h>
-#include <cstdint>
-#include <string>
-#include <sstream>
-#include <thread>
-#include <atomic>
-#include <signal.h>
-#include "pthread.h"
-#if (defined(ANDROID) || defined(__ANDROID__))
-// Boost doesn't recognize libstdcpp on top of clang correctly
-#include "boost/config.hpp"
-#include "boost/config/stdlib/libstdcpp3.hpp"
-#undef BOOST_NO_CXX11_SMART_PTR
-#undef BOOST_NO_CXX11_NULLPTR
-#endif
-#include "boost/thread/mutex.hpp"
-#include "boost/thread/condition_variable.hpp"
-#include "boost/date_time/posix_time/posix_time_types.hpp"
-#include "boost/bind/bind.hpp"
-#include <sys/stat.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/syscall.h>
+    #define __STDC_LIMIT_MACROS
+    #include <stdint.h>
+    #include <cstdint>
+    #include <string>
+    #include <sstream>
+    #include <thread>
+    #include <atomic>
+    #include <signal.h>
+    #include "pthread.h"
+    #if (defined(ANDROID) || defined(__ANDROID__))
+        // Boost doesn't recognize libstdcpp on top of clang correctly
+        #include "boost/config.hpp"
+        #include "boost/config/stdlib/libstdcpp3.hpp"
+        #undef BOOST_NO_CXX11_SMART_PTR
+        #undef BOOST_NO_CXX11_NULLPTR
+    #endif
+    #include "boost/thread/mutex.hpp"
+    #include "boost/thread/condition_variable.hpp"
+    #include "boost/date_time/posix_time/posix_time_types.hpp"
+    #include "boost/bind/bind.hpp"
+    #include <sys/stat.h>
+    #include <unistd.h>
+    #include <fcntl.h>
+    #include <sys/syscall.h>
 #endif // _WIN32
 
 // Macro indicating the C++ Rest SDK product itself is being built.
