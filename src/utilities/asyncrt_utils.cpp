@@ -24,7 +24,7 @@
 ****/
 
 #include "stdafx.h"
-
+#include "cpprest/asyncrt_utils.h"
 #ifndef _WIN32
 #if defined(__clang__)
 #pragma clang diagnostic push
@@ -42,6 +42,7 @@
 #if defined(CPPREST_STDLIB_UNICODE_CONVERSIONS)
 #include <codecvt>
 #endif
+#include <mutex>
 
 //using namespace web;
 using namespace utility;

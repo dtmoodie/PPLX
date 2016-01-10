@@ -46,6 +46,7 @@
 #endif
 
 #include "pplx/pplxinterface.h"
+#include "pplx/pplx.h"
 
 
 namespace pplx
