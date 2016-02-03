@@ -88,5 +88,12 @@ else()
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     )
+
+	install(DIRECTORY include
+		DESTINATION include
+        FILES_MATCHING PATTERN "*.h")
+	install(DIRECTORY include
+		DESTINATION include
+		FILES_MATCHING PATTERN "*.hpp")
 endif()
 
