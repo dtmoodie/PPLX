@@ -24,33 +24,33 @@ if(UNIX)
     find_library(COREFOUNDATION CoreFoundation "/")
     find_library(SECURITY Security "/")
     set(EXTRALINKS ${COREFOUNDATION} ${SECURITY})
-  elseif(ANDROID)
+  else(APPLE)
     list(APPEND SOURCES
       src/pplx/pplxlinux.cpp
     )
-  else()
-    list(APPEND SOURCES src/pplx/pplxlinux.cpp)
-  endif()
+  endif(APPLE)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNINGS} -Werror -pedantic")
-elseif(WIN32)
-  set(SOURCES
-    ${SOURCES_COMMON}
-    src/pplx/pplxwin.cpp
-  )
-  set(EXTRALINKS
-    bcrypt.lib
-    crypt32.lib
-    httpapi.lib
-    Winhttp.lib
-  )
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNINGS} /Zm200")
+else(UNIX)
+  if(WIN32)
+    set(SOURCES
+      ${SOURCES_COMMON}
+      src/pplx/pplxwin.cpp
+    )
+    set(EXTRALINKS
+      bcrypt.lib
+      crypt32.lib
+      httpapi.lib
+      Winhttp.lib
+    )
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNINGS} /Zm200")
 
   #set_source_files_properties(pch/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-  if (BUILD_SHARED_LIBS)
-    add_definitions(-D_ASYNCRT_EXPORT -D_PPLX_EXPORT -D_USRDLL)
-    ADD_DEFINITIONS("-DCPPREST_FORCE_PPLX=1")
-    ADD_DEFINITIONS("-D_PPLX_EXPORT")
-    ADD_DEFINITIONS("-D_ASYNCRT_EXPORT")
+    if (BUILD_SHARED_LIBS)
+      add_definitions(-D_ASYNCRT_EXPORT -D_PPLX_EXPORT -D_USRDLL)
+      ADD_DEFINITIONS("-DCPPREST_FORCE_PPLX=1")
+      ADD_DEFINITIONS("-D_PPLX_EXPORT")
+      ADD_DEFINITIONS("-D_ASYNCRT_EXPORT")
+    endif(BUILD_SHARED_LIBS)
   endif(WIN32)
 endif(UNIX)
 include_directories("src/pch")
