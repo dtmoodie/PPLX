@@ -89,11 +89,11 @@ else()
     ARCHIVE DESTINATION lib
     )
 
-	install(DIRECTORY include
-		DESTINATION include
+    install(DIRECTORY include
+        DESTINATION include
         FILES_MATCHING PATTERN "*.h")
-	install(DIRECTORY include
-		DESTINATION include
-		FILES_MATCHING PATTERN "*.hpp")
+    install(DIRECTORY include
+        DESTINATION include
+        FILES_MATCHING PATTERN "*.hpp")
 endif()
 
