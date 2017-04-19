@@ -60,7 +60,9 @@ add_library(${Casablanca_LIBRARY} SHARED ${SOURCES})
 target_link_libraries(${Casablanca_LIBRARY}
   ${CMAKE_THREAD_LIBS_INIT}
   ${Boost_SYSTEM_LIBRARY}
+  ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY}
+  ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_ATOMIC_LIBRARY}
   ${Boost_CHRONO_LIBRARY}
   ${Boost_RANDOM_LIBRARY}
