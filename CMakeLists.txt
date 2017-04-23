@@ -84,19 +84,37 @@ elseif(ANDROID)
 else()
   set_target_properties(${Casablanca_LIBRARY} PROPERTIES
     SOVERSION ${CPPREST_VERSION_MAJOR}.${CPPREST_VERSION_MINOR})
-
-  install(
-    TARGETS ${Casablanca_LIBRARY}
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    )
-
-    install(DIRECTORY include/
-        DESTINATION include
-        FILES_MATCHING PATTERN "*.h")
-
-    install(DIRECTORY include/
-        DESTINATION include
-        FILES_MATCHING PATTERN "*.hpp")
 endif()
+
+configure_file(pplxConfig.cmake.in 
+	"${PROJECT_BINARY_DIR}/pplxConfig.cmake" @ONLY
+)
+
+install(
+	TARGETS ${Casablanca_LIBRARY}
+	RUNTIME DESTINATION bin
+	LIBRARY DESTINATION lib
+	ARCHIVE DESTINATION lib
+)
+
+install(TARGETS ${Casablanca_LIBRARY}
+	DESTINATION lib
+	EXPORT pplxTargets
+)
+
+install(DIRECTORY include/
+	DESTINATION include
+	FILES_MATCHING PATTERN "*.h"
+)
+
+install(DIRECTORY include/
+	DESTINATION include
+	FILES_MATCHING PATTERN "*.hpp"
+)
+
+INSTALL(FILES "${PROJECT_BINARY_DIR}/pplxConfig.cmake"
+	DESTINATION "${CMAKE_INSTALL_PREFIX}" COMPONENT dev
+)
+
+install(EXPORT pplxTargets DESTINATION "${CMAKE_INSTALL_PREFIX}" COMPONENT dev)
 

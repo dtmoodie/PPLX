@@ -1,0 +1,9 @@
+
+get_filename_component(pplx_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+set(pplx_INCLUDE_DIRS "${pplx_DIR}/include")
+
+if(NOT TARGET @Casablanca_LIBRARY@)
+  include("${pplx_DIR}/pplxTargets.cmake")
+endif()
+
+set(pplx_LIBRARIES @Casablanca_LIBRARY@)
